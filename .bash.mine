@@ -1,0 +1,17 @@
+parse_git_branch() {
+    git branch 2> /dev/null | sed -n -e 's/^\* \(.*\)/\1/p'
+}
+git_push_origin() {
+    echo git push origin $1
+}
+COLOR_DEF='%f'
+COLOR_DIR='%F{197}'
+COLOR_GIT='%F{39}'
+setopt PROMPT_SUBST
+export PROMPT='${COLOR_DIR}%1d ${COLOR_GIT}[$(parse_git_branch)]${COLOR_DEF}%% '
+
+alias projectdir='cd ~/Documents/Maersk/projects/nrg'
+alias personaldir='cd ~/Documents/Personal'
+
+alias gitcb='echo "$(parse_git_branch)";echo $(parse_git_branch) | pbcopy'
+alias gits='git status'
